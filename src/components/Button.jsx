@@ -3,7 +3,11 @@ import "./Button.scss"
 function Button(props) {
     return(
         <>
-            <button onChange={props.addClickFn}>{props.name}</button>
+            <button onClick={() => {
+                 props.addClickFn(); 
+                 props.removeClickFn();
+            }
+                }>{props.name}</button>
         </>
     )
 }
