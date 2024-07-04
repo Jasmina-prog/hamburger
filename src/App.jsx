@@ -8,15 +8,16 @@ import Tomato from './components/Tomato'
 import Button from './components/Button'
 
 const data = [
-  {id: 1, title: 'green', price: 0.1},
-  {id: 2, title: 'cheese', price: 0.4},
-  {id: 3, title: 'tomato', price: 0.6},
-  {id: 4, title: 'meat', price: 1.2}
+  {id: 1, title: 'green', price: 1},
+  {id: 2, title: 'cheese', price: 2},
+  {id: 3, title: 'tomato', price: 1.5},
+  {id: 4, title: 'meat', price: 6}
 ]
 
 function App() {
 
   const [counter, setCounter] = useState(0)
+  const [component, setComponent] = useState(false)
   
   return (
     <Fragment>
@@ -30,9 +31,11 @@ function App() {
        { data.map(element => {
         const addClick = () =>{
           setCounter(counter + element.price)
+          setComponent(true)
         }
         const removeClick = () =>{
           setCounter(counter - element.price)
+          setComponent(false)
         }
         return(
           <div className='productline' key={element.id}>
@@ -41,8 +44,8 @@ function App() {
           <h2 style={{color:"yellow"}}>{element.price}$</h2>
           </div>   
           <div className="btn">
-          <Button name = "Add" addClickFn = {addClick}/>
-          <Button name = "Remove" removeClickFn ={removeClick}/>
+          <Button name = "Add" clickFn = {addClick}/>
+          <Button name = "Remove" clickFn ={removeClick}/>
         </div>
           </div>          
          )
@@ -55,10 +58,14 @@ function App() {
 
       <div className="burger">
       <div className='upside bread'></div>
-      <Green />
+      {component ? <Green /> : console.log('working')}
+      {component ? <Cheese /> : console.log('working')}
+      {component ? <Meat /> : console.log('working')}
+      {component ? <Tomato /> : console.log('working')}
+      {/* <Green />
       <Cheese />
       <Meat />
-      <Tomato/>
+      <Tomato/> */}
 
       <div className='downside bread'></div>    
       </div>
